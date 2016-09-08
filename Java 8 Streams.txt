@@ -1,0 +1,68 @@
+Stream
+
+Stream is a sequence of elements supporting sequential and parallel aggregate operations.
+
+Stream is not a data type or a collection by itself. Sequence of elements are created out of a source, like a collection object, and transformed using different operations connected as pipelines and ends with a final operation.
+
+Source – is an entity that stores or generates data. For example, it can be a collection or a random number generator.
+
+Operations – Intermediate and terminal are two types of operations in a stream. Intermediate operation returns a new stream and terminal operation consumes a stream.
+
+Stream – So the stream starts from a source and followed by one or more intermediate operations and ends with a terminal operation.
+
+Example Stream: following code prints strings greater than length 5 by iterating a collection.
+
+Collection fruitList = Arrays.asList("Apple", "Orange","Strawberry");
+fruitList.stream().filter(element -> element.length() > 5)
+	.forEach(element -> System.out.println(element));
+	
+
+Stateless Intermediate Operations
+===================================
+For example,
+
+map()
+filter()
+unsorted()
+peek()
+are stateless intermediate operations. Every individual element can be processed without the need for sharing information between them for processing.
+
+Stateful Intermediate Operations
+==================================
+For example,
+
+sorted()
+distinct()
+limit()
+etc are known as stateful operations. Because elements cannot be processed individually, they need to be compared with one another thus requiring information to be retained.
+
+Terminal Operations
+==================================
+Terminal operations consumes the stream pipeline. It does not produce another stream like intermediate operations. It produces a result or a side-effect.
+
+Following are some of the available terminal operations in the API,
+
+sum()
+min()
+max()
+count()
+average()
+collect()
+reduce()
+Once the terminal operation completes execution, then the stream is completed and it cannot be used further. If there is a need to use similar stream, then a new stream should be created. This is similar to the concept of iteration using Iterable interface.
+
+Eager and Lazy
+==================================
+Terminal operations are eager and intermediate steam operations are lazy. The intermediate operations just remain as a pipeline, and the elements are parse only when the terminal operation is executed. It is better since when there is a short-circuit the whole list of elements need not be processed, thus improving the performance.
+
+Side-effect
+=================================
+Execution of a code block in terminal operation is a side-effect. This should be used with care as it can affect the stateful nature of a intermediate operation. Operations like forEach() and peek() can only be executed using a side-effect. It can be useful for simple System.out.println for debugging small Java programs. The code block at the start of this tutorial is an example for side-effect.
+
+Short-circuiting
+=================================
+Both intermediate and terminal stream operations can do short-circuiting. If the source is an infinite one (for example, unlimited supply of random numbers), cutting it short to a finite list of elements by an intermediate operation is short-circuiting. When a terminal operation completes in final time even if the input from a stream is infinite, then it is short-circuiting. Short-circuiting is a necessary but not sufficient condition for an infinite source in a Java stream.
+
+Order
+=================================
+Order of the elements processed in an operation depends on the source in a Java stream. For example, in a sequential stream for java.util.List the order will be maintained. But in the case of Map it need not be maintained.
