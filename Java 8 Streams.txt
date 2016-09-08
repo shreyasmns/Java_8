@@ -66,3 +66,9 @@ Both intermediate and terminal stream operations can do short-circuiting. If the
 Order
 =================================
 Order of the elements processed in an operation depends on the source in a Java stream. For example, in a sequential stream for java.util.List the order will be maintained. But in the case of Map it need not be maintained.
+
+
+
+
+
+
